@@ -46,5 +46,9 @@ describe('controller routes', () => {
         expect(res.body).toEqual(order);
       });
   });
+
+  it('updates an order by id', async () => {
+
+  });
   
 });
