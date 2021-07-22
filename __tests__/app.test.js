@@ -49,11 +49,16 @@ describe('controller routes', () => {
 
   it('updates an order by id', async () => {
     const order = await Order.insert({ quantity: 10 });
+    const updatedOrder = { 
+      id: order.id,
+      quantity: 5 };
+
 
     return request(app)
       .put(`/api/v1/orders/${order.id}`)
+      .send({ quantity: 5 })
       .then((res) => {
-        expect(res.body).toEqual(order);
+        expect(res.body).toEqual(updatedOrder);
       });
   });
   
