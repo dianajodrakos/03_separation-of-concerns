@@ -1,5 +1,4 @@
 const pool = require('../lib/utils/pool');
-// const twilio = require('twilio');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
@@ -16,12 +15,11 @@ describe('controller routes', () => {
     return setup(pool);
   });
 
-  it('posts a new order in our database and sends a text message', () => {
+  it('posts a new order in our database and sends a text message', async () => {
     return request(app)
       .post('/api/v1/orders')
       .send({ quantity: 10 })
       .then((res) => {
-        // expect(createMessage).toHaveBeenCalledTimes(1);
         expect(res.body).toEqual({
           id: '1',
           quantity: 10,
@@ -29,13 +27,13 @@ describe('controller routes', () => {
       });
   });
 
-  it('gets all orders in our database', () => {
+  it('gets all orders in our database', async () => {
     const order = await Order.insert({ quantity: 10 });
 
     return request(app)
     .get('/api/v1/orders')
     .then((res) => {
-      expect(res.body).toEqual(order);
+      expect(res.body).toEqual([order]);
     });
   });
 
