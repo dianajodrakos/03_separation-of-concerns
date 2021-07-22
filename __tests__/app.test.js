@@ -64,7 +64,13 @@ describe('controller routes', () => {
 
 
   it('deletes an order by id', async () => {
+    const order = await Order.insert({ quantity: 10 })
 
+    return request(app)
+      .delete(`/api/v1/orders/${order.id}`)
+      .then((res) => {
+        expect(res.body).not.toEqual(order);
+      });
   });
   
 });
