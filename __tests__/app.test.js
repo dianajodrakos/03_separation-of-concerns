@@ -30,7 +30,13 @@ describe('controller routes', () => {
   });
 
   it('gets all orders in our database', () => {
+    const order = await Order.insert({ quantity: 10 });
 
+    return request(app)
+    .get('/api/v1/orders')
+    .then((res) => {
+      expect(res.body).toEqual(order);
+    });
   });
 
   // it('gets an order by id', async () => {
