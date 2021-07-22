@@ -61,5 +61,10 @@ describe('controller routes', () => {
         expect(res.body).toEqual(updatedOrder);
       });
   });
+
+
+  it('deletes an order by id', async () => {
+
+  });
   
 });
